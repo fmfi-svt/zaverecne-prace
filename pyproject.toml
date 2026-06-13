@@ -1,0 +1,10 @@
+[project]
+name = "zaverecne-prace"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "votr",
+]
+
+[tool.uv.sources]
+votr = { git = "https://github.com/fmfi-svt/votr.git" }
