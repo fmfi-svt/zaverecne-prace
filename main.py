@@ -110,3 +110,5 @@ for i, praca in enumerate(zaverecne_prace):
     with app.collect_operations() as ops:
         app.d.closeButton.click()
         app.awaited_close_dialog(ops)
+
+app.force_close()
