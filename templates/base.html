@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="sk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Záverečné práce</title>
+
+    <link
+      rel="stylesheet"
+      href="https://sluzby.fmph.uniba.sk/jds/1.0/jds.css"
+    />
+    <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+    <script src="https://sluzby.fmph.uniba.sk/jds/1.0/jds.js"></script>
+
+    <style>
+      .form {
+        display: grid;
+        gap: var(--space-4);
+        max-width: 32rem;
+        margin-block: var(--space-4);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="institutional-header">
+      <div class="institutional-header__inner">
+        Oficiálna stránka
+        <a href="https://fmph.uniba.sk">
+          Fakulty matematiky, fyziky a informatiky UK
+        </a>
+      </div>
+    </header>
+
+    <nav class="navbar">
+      <div class="navbar__inner">
+        <a href="#" class="navbar__brand">
+          <iconify-icon icon="lucide:printer-check" width="20"></iconify-icon>
+          Záverečné práce
+        </a>
+        <button
+          class="navbar__toggle"
+          aria-expanded="false"
+          aria-controls="main-nav"
+        >
+          <iconify-icon
+            icon="lucide:menu"
+            class="navbar__toggle-open"
+            width="22"
+          ></iconify-icon>
+          <iconify-icon
+            icon="lucide:x"
+            class="navbar__toggle-close"
+            width="22"
+          ></iconify-icon>
+        </button>
+
+        <div class="navbar__nav" id="main-nav">
+          <span class="navbar__text"> Jan Novák </span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container container--padded">
+      <div class="page-header">
+        <div>
+          <h1 class="page-header__title">Export záverečných prác</h1>
+        </div>
+      </div>
+
+      <p>Nástroj vám vyexportuje pre každého študenta:</p>
+
+      <ul>
+        <li>text záverečnej práce</li>
+        <li>posudky</li>
+        <li>protokol kontroly originality</li>
+      </ul>
+
+      <p>A dokopy</p>
+
+      <form class="form">
+        <div>
+          <label class="form-label" for="input-text">Text Input</label>
+          <input
+            class="form-input"
+            type="text"
+            id="input-text"
+            placeholder="Enter text…"
+          />
+          <span class="form-help">Helper text for additional context.</span>
+        </div>
+        <div>
+          <button type="submit" class="btn btn--primary">aa</button>
+        </div>
+      </form>
+    </div>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>© {{ footer_year }} ŠVT FMFI UK</span>
+        <span>
+          <a href="mailto:fmfi-svt@googlegroups.com">Pomoc</a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>
