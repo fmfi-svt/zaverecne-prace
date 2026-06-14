@@ -38,8 +38,9 @@ app, ops = Application.open(client.context, VSES057)
 app.awaited_open_main_dialog(ops)
 assert app.d is not None  # aby pyright nekričal na app.d
 
-# vymažeme predvolenú osobu
+# vymažeme predvolenú osobu a stredisko
 app.d.zmazatOsobu2Button.click()
+app.d.stredisko2ComboBox.select(0)
 
 # otvoríme dialóg na výber ŠP
 with app.collect_operations() as ops:
