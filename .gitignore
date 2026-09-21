@@ -1,2 +1,4 @@
 output/
+var/
 __pycache__/
+.env

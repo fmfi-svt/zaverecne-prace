@@ -7,33 +7,27 @@
 
     <link
       rel="stylesheet"
-      href="https://sluzby.fmph.uniba.sk/jds/1.0/jds.css"
+      href="https://sluzby.fmph.uniba.sk/jds/1.3/jds.css"
     />
     <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
-    <script src="https://sluzby.fmph.uniba.sk/jds/1.0/jds.js"></script>
-
-    <style>
-      .form {
-        display: grid;
-        gap: var(--space-4);
-        max-width: 32rem;
-        margin-block: var(--space-4);
-      }
-    </style>
+    <script src="https://sluzby.fmph.uniba.sk/jds/1.3/jds.js"></script>
   </head>
   <body>
-    <header class="institutional-header">
+    <header class="institutional-header institutional-header--large">
       <div class="institutional-header__inner">
-        Oficiálna stránka
-        <a href="https://fmph.uniba.sk">
-          Fakulty matematiky, fyziky a informatiky UK
+        <a href="https://fmph.uniba.sk" aria-label="FMFI UK">
+          <img
+            class="institutional-header__logo"
+            src="https://sluzby.fmph.uniba.sk/jds/1.3/assets/fmfi.svg"
+            alt="FMFI UK"
+          />
         </a>
       </div>
     </header>
 
     <nav class="navbar">
       <div class="navbar__inner">
-        <a href="#" class="navbar__brand">
+        <a href="/" class="navbar__brand">
           <iconify-icon icon="lucide:printer-check" width="20"></iconify-icon>
           Záverečné práce
         </a>
@@ -55,44 +49,16 @@
         </button>
 
         <div class="navbar__nav" id="main-nav">
-          <span class="navbar__text"> Jan Novák </span>
+          {% if username %}<span class="navbar__text">{{ username }}</span>{% endif %}
         </div>
       </div>
     </nav>
 
-    <div class="container container--padded">
-      <div class="page-header">
-        <div>
-          <h1 class="page-header__title">Export záverečných prác</h1>
-        </div>
+    <main class="page-content">
+      <div class="container container--padded">
+        {% block body %}{% endblock %}
       </div>
-
-      <p>Nástroj vám vyexportuje pre každého študenta:</p>
-
-      <ul>
-        <li>text záverečnej práce</li>
-        <li>posudky</li>
-        <li>protokol kontroly originality</li>
-      </ul>
-
-      <p>A dokopy</p>
-
-      <form class="form">
-        <div>
-          <label class="form-label" for="input-text">Text Input</label>
-          <input
-            class="form-input"
-            type="text"
-            id="input-text"
-            placeholder="Enter text…"
-          />
-          <span class="form-help">Helper text for additional context.</span>
-        </div>
-        <div>
-          <button type="submit" class="btn btn--primary">aa</button>
-        </div>
-      </form>
-    </div>
+    </main>
 
     <footer class="footer">
       <div class="footer__inner">
