@@ -4,7 +4,8 @@ import zipfile
 from datetime import datetime
 from pathlib import Path
 
-from flask import Flask, render_template, request, send_file, session
+from fladgejt.login import CookieLoginError
+from flask import Flask, redirect, render_template, request, send_file, session, url_for
 from werkzeug.exceptions import HTTPException
 
 from andrvotr_saml import ais_context, register, require_login
@@ -25,15 +26,17 @@ def inject_template_context():
 def index():
     now = datetime.now()
     year = now.year if now.month >= 9 else now.year - 1
-    return render_template(
-        "form.html", academic_year=f"{year}/{year + 1}"
-    )
+    return render_template("form.html", academic_year=f"{year}/{year + 1}")
 
 
 @app.post("/")
 @require_login
 def download():
-    ctx = ais_context()
+    try:
+        ctx = ais_context()
+    except CookieLoginError:
+        session.clear()
+        return redirect(url_for("andrvotr_login"))
 
     with tempfile.TemporaryDirectory() as tmpdir:
         tmpdir_path = Path(tmpdir)
