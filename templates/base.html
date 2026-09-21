@@ -49,7 +49,10 @@
         </button>
 
         <div class="navbar__nav" id="main-nav">
-          {% if username %}<span class="navbar__text">{{ username }}</span>{% endif %}
+          {% if username %}
+            <span class="navbar__text">{{ username }}</span>
+            <a href="/logout" class="navbar__link">Odhlásiť sa</a>
+          {% endif %}
         </div>
       </div>
     </nav>

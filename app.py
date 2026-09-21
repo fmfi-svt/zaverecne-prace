@@ -16,8 +16,8 @@ register(app)
 
 
 @app.context_processor
-def inject_year():
-    return dict(footer_year=datetime.now().year)
+def inject_template_context():
+    return {"footer_year": datetime.now().year, "username": session.get("uid")}
 
 
 @app.get("/")
@@ -26,7 +26,7 @@ def index():
     now = datetime.now()
     year = now.year if now.month >= 9 else now.year - 1
     return render_template(
-        "form.html", username=session.get("uid"), academic_year=f"{year}/{year + 1}"
+        "form.html", academic_year=f"{year}/{year + 1}"
     )
 
 
