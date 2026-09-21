@@ -62,7 +62,7 @@ def download_documents(
         # otvoríme dialóg na výber ŠP
         with app.collect_operations() as ops:
             app.d.vybratSPButton.click()
-            app.awaited_open_dialog(ops)
+        app.awaited_open_dialog(ops)
 
         # nájdeme fakultu ŠP
         index = None
@@ -90,7 +90,7 @@ def download_documents(
         app.d.vyberTable.select(index)
         with app.collect_operations() as ops:
             app.d.enterButton.click()
-            app.awaited_close_dialog(ops)
+        app.awaited_close_dialog(ops)
 
         # Načítame tabuľku
         app.d.zobrazit2Button.click()
@@ -101,44 +101,44 @@ def download_documents(
             app.d.zaverecnePraceTable.select(i)
             with app.collect_operations() as ops:
                 app.d.hodnoteniePraceAction.execute()
-                if ops[0].method != "confirmBox":
-                    app.awaited_open_dialog(ops)
 
             # Je možné, že riadok je zamknutý, zobrazíme si ho aj tak.
-            if ops[0].method == "confirmBox":
+            if len(ops) == 1 and ops[0].method == "confirmBox":
                 with app.collect_operations() as ops:
                     app.confirm_box(2)
-                    app.awaited_open_dialog(ops)
+
+            # Či už hneď, alebo po potvrdení, mal by sa otvoriť nový dialóg.
+            app.awaited_open_dialog(ops)
 
             student_prefix = f"{praca['studentPriezvisko']}_{praca['studentMeno']}"
 
             for action, filename in SUBORY:
-                with app.collect_operations() as ops:
-                    component = getattr(app.d, action, None)
-                    if not component:
-                        continue
+                component = getattr(app.d, action, None)
+                if not component:
+                    continue
 
+                with app.collect_operations() as ops:
                     if action.endswith("Action"):
                         component.execute()
                     else:
                         component.click()
 
-                    # AIS nám vynadá, že daný objekt neexistuje.
-                    if ops[0].method == "messageBox":
-                        continue
+                # AIS nám vynadá, že daný objekt neexistuje.
+                if len(ops) == 1 and ops[0].method == "messageBox":
+                    continue
 
-                    resp: Response = app.awaited_shell_exec(ops)
-                    if resp.status_code != 200:
-                        continue
-                    if len(resp.content) == 0:
-                        continue
+                resp: Response = app.awaited_shell_exec(ops)
+                if resp.status_code != 200:
+                    continue
+                if len(resp.content) == 0:
+                    continue
 
                 output_filename = f"{student_prefix}__{filename}.pdf"
                 (output / output_filename).write_bytes(resp.content)
 
             with app.collect_operations() as ops:
                 app.d.closeButton.click()
-                app.awaited_close_dialog(ops)
+            app.awaited_close_dialog(ops)
     finally:
         app.force_close()
 
