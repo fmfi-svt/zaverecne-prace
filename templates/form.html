@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <div class="page-header">
+    <div>
+      <h1 class="page-header__title">Export záverečných prác</h1>
+    </div>
+  </div>
+
+  <p>Nástroj vám vyexportuje pre každého študenta:</p>
+
+  <ul>
+    <li>text záverečnej práce</li>
+    <li>posudky</li>
+    <li>protokol kontroly originality</li>
+  </ul>
+
+  <p>
+    A navyše vám vyrobí jeden súbor so všetkými titulnými stranami a
+    všetkými kontrolami originality <i>(z každej prvých 5 strán)</i>.
+  </p>
+
+  <form class="form" method="POST">
+    <div>
+      <label class="form-label" for="academic_year">Akademický rok</label>
+      <input
+        class="form-input"
+        type="text"
+        id="academic_year"
+        name="academic_year"
+        value="{{ academic_year }}"
+        required
+      />
+      <span class="form-help">Napríklad 2025/2026.</span>
+    </div>
+    <div>
+      <label class="form-label" for="faculty_work">Fakulta práce</label>
+      <input
+        class="form-input"
+        type="text"
+        id="faculty_work"
+        name="faculty_work"
+        value="FMFI"
+        required
+      />
+      <span class="form-help">Napríklad FMFI, PriF.</span>
+    </div>
+    <div>
+      <label class="form-label" for="faculty_study_programme">Fakulta študijného programu</label>
+      <input
+        class="form-input"
+        type="text"
+        id="faculty_study_programme"
+        name="faculty_study_programme"
+        value="FMFI"
+        required
+      />
+      <span class="form-help">Napríklad FMFI, PriF.</span>
+    </div>
+    <div>
+      <label class="form-label" for="studijny_program">Študijný program</label>
+      <input
+        class="form-input"
+        type="text"
+        id="studijny_program"
+        name="studijny_program"
+        required
+      />
+      <span class="form-help">
+        Zadajte skratku študijného programu, napríklad mAIN, DAV, ...
+      </span>
+    </div>
+    <div>
+      <button type="submit" class="btn btn--primary">Vyexportovať</button>
+    </div>
+  </form>
+{% endblock body %}

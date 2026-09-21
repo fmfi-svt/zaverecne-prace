@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDescriptor  xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui" entityID="https://idp.uniba.sk/idp/shibboleth">
+
+    <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol urn:mace:shibboleth:1.0">
+
+        <Extensions>
+            <shibmd:Scope regexp="false">uniba.sk</shibmd:Scope>
+            <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+            <mdui:DisplayName xml:lang="en">Comenius University</mdui:DisplayName>
+               <mdui:DisplayName xml:lang="sk">Univerzita Komenského</mdui:DisplayName>
+               <mdui:DisplayName xml:lang="cs">Univerzita Komenského</mdui:DisplayName>
+               <mdui:Logo height="50" width="50">https://idp.uniba.sk/idp/uk_logo.png</mdui:Logo>
+            </mdui:UIInfo>
+        </Extensions>
+
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIDHDCCAgSgAwIBAgIVAOBMsVyvd1Cq+EA6Iln+Kmeqo2cHMA0GCSqGSIb3DQEB
+BQUAMBcxFTATBgNVBAMTDGlkcC51bmliYS5zazAeFw0xMjEwMTQwOTQxNTFaFw0z
+MjEwMTQwOTQxNTFaMBcxFTATBgNVBAMTDGlkcC51bmliYS5zazCCASIwDQYJKoZI
+hvcNAQEBBQADggEPADCCAQoCggEBAJp5hV/G2VILXF2I4muZYtlP95GTjMUc8M4z
+LgFtVTRU5cVhm86rxHda6L0abBDpFayfPTmjt7khunmP2IQHS0ttIXz9bSb5mWvA
+gnr5ZRgs44ehOgNFD44xho4itZL6Pz3vVisEVpIOt6plHVUlklIYROgjlZXjYgdN
+H2DkZHKSrN+gzJQ1Swh86JM+6RhRND/fkIhXRpGA0sQLs1+/WKpZV+mNF5560uBo
+QgMk/eq03tBHE6R+SKRmDKjXEwEK2lPKUFAW7mh+HvoaAoPoG5fd1pYnvYhscktk
+aq9SlojHo44DKFlDq5NUYwD7aswNLD+ump/6r3HdhF99lgpL4VECAwEAAaNfMF0w
+PAYDVR0RBDUwM4IMaWRwLnVuaWJhLnNrhiNodHRwczovL2lkcC51bmliYS5zay9p
+ZHAvc2hpYmJvbGV0aDAdBgNVHQ4EFgQUOepuOAPlSskKMblJ3Irb9vJFqUwwDQYJ
+KoZIhvcNAQEFBQADggEBAJQY9cef2nxtNluXZ9hs524G3z+kkMNzmdLItWz1tKo4
+Xgb/q0YDUU84kfj9DoH/qO9X1ue7RSejJlpjrilepnLx0wLfQWMQq9/HRqXdJBg5
+/zSMe1PPaf9HiIyhDNM7WdGukqqzOu54LK7nEoeKAzqa78FqP9sp2f19Q2bE6WuC
+pEiLJqQPBARNDyupUSzJkSz5RspS1RNjUxSzo5XSX2vU4QpwIkkCjWCt5T+fLn8Q
+dmLheZRXVZl7HiWRuSeCOUmzdBg1eoVTjKwPnPy999KQHDUKCW7pKNfe1hxyE7ug
+rq9jEtVGo28EzizrtHEnovfX0kFdyd53lypZ881COv4=
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIDGzCCAgOgAwIBAgIUJwC57S47Np3/Mc9JImmX1/lfLUkwDQYJKoZIhvcNAQEL
+BQAwFzEVMBMGA1UEAwwMaWRwLnVuaWJhLnNrMB4XDTE3MDUyMjE3MTkwNFoXDTM3
+MDUyMjE3MTkwNFowFzEVMBMGA1UEAwwMaWRwLnVuaWJhLnNrMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo3Ruw7Hwpqow110dWCopfE5RXrkBIOdCOlR8
+E+7ux2vDTFEmb9FCQ70mJo2EmjIC7gSbpDqekh/tWFm1paFntQA/dCMVkf5dnsUK
+9Yh9Vr/FYQ4sSQMYYko8kfsx9e7VjKcvlvk3RnieHoD47WzfgnPOPt9i8f/3Unjc
+rgJMY3+9pMSYlIcaAc/ofGwO3klEns8TdXKPwtQ8Sx37ltgefPwd7jQyFrMVVJ6d
+hHTorltg3JPK8GlX7xC7ZyoHuIVKduoz4kBwq9jujVHLhDCiQDw7Re/Bl3rELlAd
+U2spRizbd0jXputsg8/X9tw0sHb/Oo13bG1tOyMfX9OwN2NvgwIDAQABo18wXTAd
+BgNVHQ4EFgQU/1eIFMTQm43wvaVRP8noPydNwJkwPAYDVR0RBDUwM4IMaWRwLnVu
+aWJhLnNrhiNodHRwczovL2lkcC51bmliYS5zay9pZHAvc2hpYmJvbGV0aDANBgkq
+hkiG9w0BAQsFAAOCAQEAHg1D6hh+HABm5rH/ZBj+SatlSq/bz3emNDfKC41FV6qV
+Tpef4rdS4qEXC51Plcbg9hj4AUIoMZ03jVEw1O6D90qEsj8b+hX0A/JjxRfqg8Ke
+q0UgBMtI5Nqss0Jx3fV3SW5NBTLLrKmtxxDCmIJ3MyFLdyKKqYJZfxEiiIHn9An2
++hbIhq9jiel0h0hdiwCxm3mmWjAxMdAzXnGAw5Z5RrNDo39s+6Rjly+miOUmwBfr
+290/5bxKiCAWPYwuCE3+AhppyZAlAatnVDICPFsSaoFMay2VxuNI08DsknH4BbZN
+pQ5byR0Ur0ul0Ekz/6wj2Moqg3CPilc/NCm8iy37uA==
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+        <KeyDescriptor use="encryption">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIDHDCCAgSgAwIBAgIVAO857ZVX56zOjwXTbvJnrWNlisNBMA0GCSqGSIb3DQEB
+CwUAMBcxFTATBgNVBAMMDGlkcC51bmliYS5zazAeFw0xNzA1MjIxNzE5MDVaFw0z
+NzA1MjIxNzE5MDVaMBcxFTATBgNVBAMMDGlkcC51bmliYS5zazCCASIwDQYJKoZI
+hvcNAQEBBQADggEPADCCAQoCggEBAIG+2vWN0nlGbizVXpwkQy43uNj0FJPAm3lZ
+XM4IA/hy3aJxMisfYAb44mFTYrFgCdIEiKaTwZ4CUV7EURX4IAu9b8Ogtm4UqY/C
+ba8mludbYEBHVgpJ5XAivHMH5kmljrlQB/PjY6CSzeecuYGLXwSB8t/pJ8Hqxeeq
+W8azloso2Huo1xkqf96Mi/3/AmjG9a/DamqKXacxAaPwyQO2qvYEOlxaqVyzHakV
+BC/bV8tokSoPSzW6p8hTg+KUvJChTFmGdxQYIlg5arkX2d5i9VMbqErsxOASD9cb
+H3xAQxoqU1X8CGviYqmFdhtIB/RzIO0j+qorvf0FpQlrJ5oGyvMCAwEAAaNfMF0w
+HQYDVR0OBBYEFMBNwDkUw4cpg4xYjz/tYfu/jbgkMDwGA1UdEQQ1MDOCDGlkcC51
+bmliYS5za4YjaHR0cHM6Ly9pZHAudW5pYmEuc2svaWRwL3NoaWJib2xldGgwDQYJ
+KoZIhvcNAQELBQADggEBAC4fmQIiD/KQLmxoEiEqV4+5OQBpOvdVKB7p3NUEFmDV
+XlWGQG74oyFuNPVVj1RYpb8sEii3VLH87EDoBfcrFH2Eky58QdmBwUPA0b0NC3Cl
+Po78u3AFtTzVUW2h4QAOTDp8jYXXT7mZIxZ0jwg1pjOZ5PvIcQHS6pBCEwjzBuS7
+Q2ZI424iSwhNTqS4IduxiIUQkcPoPx5t6USdUIFxmVGqf4Hae5icG432Kl2671xn
+/VXZZM1xL48zL9GFwY4owk33TrDFHHioL7yLQ9l2xXOoNNEe49MsONzMsgPTGGkB
+bziKvgAd6+zmOE7drjQAuSVw1hPugIKEuwlrT97sy1I=
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+
+        <ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://idp.uniba.sk:8443/idp/profile/SAML1/SOAP/ArtifactResolution" index="1"/>
+        <ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://idp.uniba.sk:8443/idp/profile/SAML2/SOAP/ArtifactResolution" index="2"/>
+
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://idp.uniba.sk/idp/profile/SAML2/Redirect/SLO"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://idp.uniba.sk/idp/profile/SAML2/POST/SLO"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://idp.uniba.sk/idp/profile/SAML2/POST-SimpleSign/SLO"/>
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://idp.uniba.sk:8443/idp/profile/SAML2/SOAP/SLO"/>
+
+        <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest" Location="https://idp.uniba.sk/idp/profile/Shibboleth/SSO"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://idp.uniba.sk/idp/profile/SAML2/POST/SSO"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://idp.uniba.sk/idp/profile/SAML2/POST-SimpleSign/SSO"/>
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://idp.uniba.sk/idp/profile/SAML2/Redirect/SSO"/>
+
+    </IDPSSODescriptor>
+
+
+    <AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+
+        <Extensions>
+            <shibmd:Scope regexp="false">uniba.sk</shibmd:Scope>
+        </Extensions>
+
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIDHDCCAgSgAwIBAgIVAOBMsVyvd1Cq+EA6Iln+Kmeqo2cHMA0GCSqGSIb3DQEB
+BQUAMBcxFTATBgNVBAMTDGlkcC51bmliYS5zazAeFw0xMjEwMTQwOTQxNTFaFw0z
+MjEwMTQwOTQxNTFaMBcxFTATBgNVBAMTDGlkcC51bmliYS5zazCCASIwDQYJKoZI
+hvcNAQEBBQADggEPADCCAQoCggEBAJp5hV/G2VILXF2I4muZYtlP95GTjMUc8M4z
+LgFtVTRU5cVhm86rxHda6L0abBDpFayfPTmjt7khunmP2IQHS0ttIXz9bSb5mWvA
+gnr5ZRgs44ehOgNFD44xho4itZL6Pz3vVisEVpIOt6plHVUlklIYROgjlZXjYgdN
+H2DkZHKSrN+gzJQ1Swh86JM+6RhRND/fkIhXRpGA0sQLs1+/WKpZV+mNF5560uBo
+QgMk/eq03tBHE6R+SKRmDKjXEwEK2lPKUFAW7mh+HvoaAoPoG5fd1pYnvYhscktk
+aq9SlojHo44DKFlDq5NUYwD7aswNLD+ump/6r3HdhF99lgpL4VECAwEAAaNfMF0w
+PAYDVR0RBDUwM4IMaWRwLnVuaWJhLnNrhiNodHRwczovL2lkcC51bmliYS5zay9p
+ZHAvc2hpYmJvbGV0aDAdBgNVHQ4EFgQUOepuOAPlSskKMblJ3Irb9vJFqUwwDQYJ
+KoZIhvcNAQEFBQADggEBAJQY9cef2nxtNluXZ9hs524G3z+kkMNzmdLItWz1tKo4
+Xgb/q0YDUU84kfj9DoH/qO9X1ue7RSejJlpjrilepnLx0wLfQWMQq9/HRqXdJBg5
+/zSMe1PPaf9HiIyhDNM7WdGukqqzOu54LK7nEoeKAzqa78FqP9sp2f19Q2bE6WuC
+pEiLJqQPBARNDyupUSzJkSz5RspS1RNjUxSzo5XSX2vU4QpwIkkCjWCt5T+fLn8Q
+dmLheZRXVZl7HiWRuSeCOUmzdBg1eoVTjKwPnPy999KQHDUKCW7pKNfe1hxyE7ug
+rq9jEtVGo28EzizrtHEnovfX0kFdyd53lypZ881COv4=
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+        <KeyDescriptor use="signing">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIDGzCCAgOgAwIBAgIUJwC57S47Np3/Mc9JImmX1/lfLUkwDQYJKoZIhvcNAQEL
+BQAwFzEVMBMGA1UEAwwMaWRwLnVuaWJhLnNrMB4XDTE3MDUyMjE3MTkwNFoXDTM3
+MDUyMjE3MTkwNFowFzEVMBMGA1UEAwwMaWRwLnVuaWJhLnNrMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo3Ruw7Hwpqow110dWCopfE5RXrkBIOdCOlR8
+E+7ux2vDTFEmb9FCQ70mJo2EmjIC7gSbpDqekh/tWFm1paFntQA/dCMVkf5dnsUK
+9Yh9Vr/FYQ4sSQMYYko8kfsx9e7VjKcvlvk3RnieHoD47WzfgnPOPt9i8f/3Unjc
+rgJMY3+9pMSYlIcaAc/ofGwO3klEns8TdXKPwtQ8Sx37ltgefPwd7jQyFrMVVJ6d
+hHTorltg3JPK8GlX7xC7ZyoHuIVKduoz4kBwq9jujVHLhDCiQDw7Re/Bl3rELlAd
+U2spRizbd0jXputsg8/X9tw0sHb/Oo13bG1tOyMfX9OwN2NvgwIDAQABo18wXTAd
+BgNVHQ4EFgQU/1eIFMTQm43wvaVRP8noPydNwJkwPAYDVR0RBDUwM4IMaWRwLnVu
+aWJhLnNrhiNodHRwczovL2lkcC51bmliYS5zay9pZHAvc2hpYmJvbGV0aDANBgkq
+hkiG9w0BAQsFAAOCAQEAHg1D6hh+HABm5rH/ZBj+SatlSq/bz3emNDfKC41FV6qV
+Tpef4rdS4qEXC51Plcbg9hj4AUIoMZ03jVEw1O6D90qEsj8b+hX0A/JjxRfqg8Ke
+q0UgBMtI5Nqss0Jx3fV3SW5NBTLLrKmtxxDCmIJ3MyFLdyKKqYJZfxEiiIHn9An2
++hbIhq9jiel0h0hdiwCxm3mmWjAxMdAzXnGAw5Z5RrNDo39s+6Rjly+miOUmwBfr
+290/5bxKiCAWPYwuCE3+AhppyZAlAatnVDICPFsSaoFMay2VxuNI08DsknH4BbZN
+pQ5byR0Ur0ul0Ekz/6wj2Moqg3CPilc/NCm8iy37uA==
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+        <KeyDescriptor use="encryption">
+            <ds:KeyInfo>
+                    <ds:X509Data>
+                        <ds:X509Certificate>
+MIIDHDCCAgSgAwIBAgIVAO857ZVX56zOjwXTbvJnrWNlisNBMA0GCSqGSIb3DQEB
+CwUAMBcxFTATBgNVBAMMDGlkcC51bmliYS5zazAeFw0xNzA1MjIxNzE5MDVaFw0z
+NzA1MjIxNzE5MDVaMBcxFTATBgNVBAMMDGlkcC51bmliYS5zazCCASIwDQYJKoZI
+hvcNAQEBBQADggEPADCCAQoCggEBAIG+2vWN0nlGbizVXpwkQy43uNj0FJPAm3lZ
+XM4IA/hy3aJxMisfYAb44mFTYrFgCdIEiKaTwZ4CUV7EURX4IAu9b8Ogtm4UqY/C
+ba8mludbYEBHVgpJ5XAivHMH5kmljrlQB/PjY6CSzeecuYGLXwSB8t/pJ8Hqxeeq
+W8azloso2Huo1xkqf96Mi/3/AmjG9a/DamqKXacxAaPwyQO2qvYEOlxaqVyzHakV
+BC/bV8tokSoPSzW6p8hTg+KUvJChTFmGdxQYIlg5arkX2d5i9VMbqErsxOASD9cb
+H3xAQxoqU1X8CGviYqmFdhtIB/RzIO0j+qorvf0FpQlrJ5oGyvMCAwEAAaNfMF0w
+HQYDVR0OBBYEFMBNwDkUw4cpg4xYjz/tYfu/jbgkMDwGA1UdEQQ1MDOCDGlkcC51
+bmliYS5za4YjaHR0cHM6Ly9pZHAudW5pYmEuc2svaWRwL3NoaWJib2xldGgwDQYJ
+KoZIhvcNAQELBQADggEBAC4fmQIiD/KQLmxoEiEqV4+5OQBpOvdVKB7p3NUEFmDV
+XlWGQG74oyFuNPVVj1RYpb8sEii3VLH87EDoBfcrFH2Eky58QdmBwUPA0b0NC3Cl
+Po78u3AFtTzVUW2h4QAOTDp8jYXXT7mZIxZ0jwg1pjOZ5PvIcQHS6pBCEwjzBuS7
+Q2ZI424iSwhNTqS4IduxiIUQkcPoPx5t6USdUIFxmVGqf4Hae5icG432Kl2671xn
+/VXZZM1xL48zL9GFwY4owk33TrDFHHioL7yLQ9l2xXOoNNEe49MsONzMsgPTGGkB
+bziKvgAd6+zmOE7drjQAuSVw1hPugIKEuwlrT97sy1I=
+                        </ds:X509Certificate>
+                    </ds:X509Data>
+            </ds:KeyInfo>
+
+        </KeyDescriptor>
+
+        <AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://idp.uniba.sk:8443/idp/profile/SAML1/SOAP/AttributeQuery"/>
+        <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://idp.uniba.sk:8443/idp/profile/SAML2/SOAP/AttributeQuery"/>
+
+    </AttributeAuthorityDescriptor>
+
+</EntityDescriptor>
