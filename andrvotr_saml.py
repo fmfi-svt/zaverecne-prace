@@ -1,3 +1,4 @@
+import asyncio
 import os
 import re
 from collections.abc import Callable
@@ -7,7 +8,8 @@ from pathlib import Path
 from typing import TypeVar
 from urllib.parse import urlsplit
 
-from fladgejt.login import create_client
+from fladgejt.base import BaseClient
+from fladgejt.login import ServerDict, create_client
 from flask import Flask, Response, redirect, request, session, url_for
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.idp_metadata_parser import OneLogin_Saml2_IdPMetadataParser
@@ -109,50 +111,44 @@ def require_login(func: F) -> F:
     return wrapper  # type: ignore[return-value]
 
 
-def _votr_server_conf(login_types):
-    """Return Votr server config for AIS."""
-    return {
-        "title": AIS_URL,
-        "login_types": login_types,
-        "ais_cookie": "JSESSIONID",
-        "ais_url": AIS_URL,
-    }
+_VOTR_SERVER_CONFIG = ServerDict(
+    title=AIS_URL,
+    login_types=("saml_andrvotr", "cookie"),
+    ais_cookie="JSESSIONID",
+    ais_url=AIS_URL,
+)
 
 
 def create_ais_client(andrvotr_authority_token: str):
     """Use an Andrvotr token to create a logged-in Votr client."""
-    return create_client(
-        _votr_server_conf(("saml_andrvotr",)),
+    assert ANDRVOTR_API_KEY
+    return asyncio.run(create_client(
+        _VOTR_SERVER_CONFIG,
         {
             "type": "saml_andrvotr",
             "my_entity_id": ROOT_URL + "saml_sp",
             "andrvotr_api_key": ANDRVOTR_API_KEY,
             "andrvotr_authority_token": andrvotr_authority_token,
         },
-    )
+    ))
 
 
-def create_ais_context(andrvotr_authority_token: str):
-    """Use an Andrvotr token to create a logged-in AIS context."""
-    return create_ais_client(andrvotr_authority_token).context
-
-
-def _cookie_string(client) -> str:
+def _cookie_string(client: BaseClient) -> str:
     """Serialize AIS cookies from a Votr client for Flask session storage."""
     ais_host = urlsplit(AIS_URL).hostname
     return "; ".join(
         f"{cookie.name}={cookie.value}"
-        for cookie in client.context.requests_session.cookies
+        for cookie in client.context.cookie_jar
         if cookie.domain.lstrip(".") == ais_host
     )
 
 
 def ais_context():
     """Recreate a logged-in AIS context from cookies in Flask session."""
-    return create_client(
-        _votr_server_conf(("cookie",)),
+    return asyncio.run(create_client(
+        _VOTR_SERVER_CONFIG,
         {"type": "cookie", "ais_cookie": session["ais_cookies"]},
-    ).context
+    )).context
 
 
 def _uniba_metadata(metadata: bytes) -> bytes:

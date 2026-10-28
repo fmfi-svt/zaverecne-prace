@@ -1,7 +1,7 @@
 [project]
 name = "zaverecne-prace"
 version = "0.1.0"
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 dependencies = [
     "flask>=3.1.3",
     "gunicorn>=23.0.0",
@@ -10,6 +10,10 @@ dependencies = [
     "python3-saml>=1.16.0",
     "votr",
 ]
+
+[tool.basedpyright]
+reportUnusedParameter = "hint"
+reportUnusedCallResult = "none"
 
 [tool.uv.sources]
 votr = { git = "https://github.com/fmfi-svt/votr.git" }

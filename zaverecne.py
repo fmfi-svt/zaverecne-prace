@@ -1,10 +1,19 @@
+import asyncio
+from abc import ABC
 from pathlib import Path
 
 import pikepdf
 from aisikl.app import Application
+from aisikl.components.action import Action
+from aisikl.components.button import Button
+from aisikl.components.combobox import ComboBox
+from aisikl.components.menuitem import MenuItem
+from aisikl.components.table import Table
+from aisikl.context import Context
+from aisikl.dialog import Dialog
+from aisikl.operations import CloseDialogOp, ConfirmBoxOp, MessageBoxOp, OpenDialogOp, ShellExecOp
 from pdfminer.high_level import extract_pages
 from pdfminer.layout import LTTextContainer
-from requests import Response
 
 VSES057 = "/ais/servlets/WebUIServlet?appClassName=ais.gui.vs.es.VSES057App&kodAplikacie=VSES057&uiLang=SK"
 SUBORY = [
@@ -15,20 +24,55 @@ SUBORY = [
 ]
 
 
+class EvidenciaZaverecnychPracDialogsType(ABC, Dialog):
+    akademickyRok2ComboBox: ComboBox
+    c5Button: Button
+    closeButton: Button
+    enterButton: Button
+    fakultaComboBox: ComboBox
+    hodnoteniePraceAction: Action
+    potvrditFakultuButton: Button
+    stredisko2ComboBox: ComboBox
+    vyberTable: Table
+    vybratSPButton: Button
+    zaverecnePraceTable: Table
+    zmazatOsobu2Button: Button
+    zobrazVyberButton: Button
+    zobrazit2Button: Button
+
+
 def download_documents(
-    ctx,
+    ctx: Context,
     *,
     academic_year: str,
     faculty_work: str,
     faculty_study_programme: str,
     study_programme: str,
     output: Path,
-):
+) -> None:
+    asyncio.run(download_documents_async(
+        ctx=ctx,
+        academic_year=academic_year,
+        faculty_work=faculty_work,
+        faculty_study_programme=faculty_study_programme,
+        study_programme=study_programme,
+        output=output,
+    ))
+
+
+async def download_documents_async(
+    ctx: Context,
+    *,
+    academic_year: str,
+    faculty_work: str,
+    faculty_study_programme: str,
+    study_programme: str,
+    output: Path,
+) -> None:
 
     # otvoríme VSES057
-    app, ops = Application.open(ctx, VSES057)
-    app.awaited_open_main_dialog(ops)
-    assert app.d is not None  # aby pyright nekričal na app.d
+    app, ops = await Application[EvidenciaZaverecnychPracDialogsType].open(ctx, VSES057)
+    await ops.expect_one(OpenDialogOp).perform()
 
     try:
         # vyberieme fakultu práce
@@ -40,8 +84,8 @@ def download_documents(
         if index is None:
             raise ValueError("Neplatná fakulta práce.")
 
-        app.d.fakultaComboBox.select(index)
-        app.d.potvrditFakultuButton.click()
+        await app.d.fakultaComboBox.select(index)
+        await app.d.potvrditFakultuButton.click()
 
         # vyberieme akademický rok
         index = None
@@ -52,17 +96,16 @@ def download_documents(
         if index is None:
             raise ValueError("Neplatný akademický rok.")
 
-        app.d.akademickyRok2ComboBox.select(index)
-        app.d.c5Button.click()
+        await app.d.akademickyRok2ComboBox.select(index)
+        await app.d.c5Button.click()
 
         # vymažeme predvolenú osobu a stredisko
-        app.d.zmazatOsobu2Button.click()
-        app.d.stredisko2ComboBox.select(0)
+        await app.d.zmazatOsobu2Button.click()
+        await app.d.stredisko2ComboBox.select(0)
 
         # otvoríme dialóg na výber ŠP
-        with app.collect_operations() as ops:
-            app.d.vybratSPButton.click()
-        app.awaited_open_dialog(ops)
+        ops = await app.d.vybratSPButton.click(return_ops=True)
+        await ops.expect_one(OpenDialogOp).perform()
 
         # nájdeme fakultu ŠP
         index = None
@@ -73,11 +116,11 @@ def download_documents(
         if index is None:
             raise ValueError("Neplatná fakulta študijného programu.")
 
-        app.d.fakultaComboBox.select(index)
-        app.d.zobrazVyberButton.click()
+        await app.d.fakultaComboBox.select(index)
+        await app.d.zobrazVyberButton.click()
 
         # nájdeme v tabuľke chcený ŠP a zavrieme dialóg
-        rows = app.d.vyberTable.all_rows()
+        rows = await app.d.vyberTable.all_rows()
         index = None
         for i, row in enumerate(rows):
             if row["skratka"] == study_programme:
@@ -87,47 +130,45 @@ def download_documents(
         if index is None:
             raise ValueError("Neplatný študijný program.")
 
-        app.d.vyberTable.select(index)
-        with app.collect_operations() as ops:
-            app.d.enterButton.click()
-        app.awaited_close_dialog(ops)
+        await app.d.vyberTable.select(index)
+        ops = await app.d.enterButton.click(return_ops=True)
+        await ops.expect_one(CloseDialogOp).perform()
 
         # Načítame tabuľku
-        app.d.zobrazit2Button.click()
-        zaverecne_prace = app.d.zaverecnePraceTable.all_rows()
+        await app.d.zobrazit2Button.click()
+        zaverecne_prace = await app.d.zaverecnePraceTable.all_rows()
 
         for i, praca in enumerate(zaverecne_prace):
             # Otvoríme "Hodnotenie záverečnej práce, posudok"
-            app.d.zaverecnePraceTable.select(i)
-            with app.collect_operations() as ops:
-                app.d.hodnoteniePraceAction.execute()
+            await app.d.zaverecnePraceTable.select(i)
+            ops = await app.d.hodnoteniePraceAction.execute(return_ops=True)
 
             # Je možné, že riadok je zamknutý, zobrazíme si ho aj tak.
-            if len(ops) == 1 and ops[0].method == "confirmBox":
-                with app.collect_operations() as ops:
-                    app.confirm_box(2)
+            if ops.has_types(ConfirmBoxOp):
+                ops = await ops.expect_one(ConfirmBoxOp).reply(ConfirmBoxOp.Option.YES, return_ops=True)
 
             # Či už hneď, alebo po potvrdení, mal by sa otvoriť nový dialóg.
-            app.awaited_open_dialog(ops)
+            await ops.expect_one(OpenDialogOp).perform()
 
             student_prefix = f"{praca['studentPriezvisko']}_{praca['studentMeno']}"
 
             for action, filename in SUBORY:
-                component = getattr(app.d, action, None)
+                component = app.d.components.get(action)
                 if not component:
                     continue
 
-                with app.collect_operations() as ops:
-                    if action.endswith("Action"):
-                        component.execute()
-                    else:
-                        component.click()
+                if isinstance(component, Action):
+                    ops = await component.execute(return_ops=True)
+                elif isinstance(component, MenuItem):
+                    ops = await component.click(return_ops=True)
+                else:
+                    raise TypeError(repr(component))
 
                 # AIS nám vynadá, že daný objekt neexistuje.
-                if len(ops) == 1 and ops[0].method == "messageBox":
+                if ops.has_types(MessageBoxOp):
                     continue
 
-                resp: Response = app.awaited_shell_exec(ops)
+                resp = await ops.expect_one(ShellExecOp).download()
                 if resp.status_code != 200:
                     continue
                 if len(resp.content) == 0:
@@ -136,11 +177,10 @@ def download_documents(
                 output_filename = f"{student_prefix}__{filename}.pdf"
                 (output / output_filename).write_bytes(resp.content)
 
-            with app.collect_operations() as ops:
-                app.d.closeButton.click()
-            app.awaited_close_dialog(ops)
+            ops = await app.d.closeButton.click(return_ops=True)
+            await ops.expect_one(CloseDialogOp).perform()
     finally:
-        app.force_close()
+        await app.force_close()
 
 
 def merge_originality_reports(directory: Path, pages_per_file: int = 2):
